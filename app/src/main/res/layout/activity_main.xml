@@ -1,19 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.ascalculator.MainActivity">
 
-    <Button
-        android:id="@+id/button"
+    <TextView
+        android:id="@+id/calcScreen"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="0"
+       android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        />
+
+    <GridLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Press Me"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_below="@+id/calcScreen"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_centerHorizontal="true"
+        android:columnCount="3"
+        >
+        <Button
+            android:id="@+id/bSeven"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="7"
 
-</android.support.constraint.ConstraintLayout>
+            />
+        <Button
+            android:id="@+id/bEight"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="8"
+
+            />
+        <Button
+            android:id="@+id/bNine"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="9"
+
+            />
+        <Button
+            android:id="@+id/bFour"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="4"
+
+            />
+        <Button
+            android:id="@+id/bFive"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="5"
+
+            />
+        <Button
+            android:id="@+id/bSix"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="6"
+
+            />
+        <Button
+            android:id="@+id/bOne"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="1"
+
+            />
+        <Button
+            android:id="@+id/bTwo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="2"
+
+            />
+        <Button
+            android:id="@+id/bThree"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="3"
+
+            />
+        <Button
+            android:id="@+id/bZero"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="0"
+
+            />
+
+        <Button
+            android:id="@+id/bBackspace"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="X"
+
+            />
+
+    </GridLayout>
+
+</RelativeLayout>
