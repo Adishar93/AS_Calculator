@@ -1,5 +1,5 @@
-# AmazfitStratosTestApp
-Test App for Amazfit Stratos Android Watch
+# AmazfitVergeASCalculator
+Calculator app for Amazfit Verge
 
 ## Interesting resources for Amazfit watches development:
 - https://github.com/KieronQuinn?tab=repositories
