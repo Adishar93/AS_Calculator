@@ -10,8 +10,6 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-const val EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE"
-
 class MainActivity : AppCompatActivity() {
     var decimalAllowed=true
     var operationAllowed=true
