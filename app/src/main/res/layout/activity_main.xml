@@ -14,6 +14,7 @@
         android:background="@android:color/transparent"
         android:clickable="false"
         android:cursorVisible="false"
+        android:singleLine="true"
         android:focusable="false"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -132,6 +133,7 @@
            android:id="@+id/bMul"
            android:layout_width="40dp"
            android:layout_height="40dp"
+           android:backgroundTint="@android:color/holo_blue_light"
            android:text="*"
 
            />
@@ -139,6 +141,7 @@
            android:id="@+id/bDivide"
            android:layout_width="40dp"
            android:layout_height="40dp"
+           android:backgroundTint="@android:color/holo_blue_light"
            android:text="/"
 
            />
@@ -146,6 +149,7 @@
            android:id="@+id/bAdd"
            android:layout_width="40dp"
            android:layout_height="40dp"
+           android:backgroundTint="@android:color/holo_blue_light"
            android:text="+"
 
            />
@@ -153,6 +157,7 @@
            android:id="@+id/bSub"
            android:layout_width="40dp"
            android:layout_height="40dp"
+           android:backgroundTint="@android:color/holo_blue_light"
            android:text="-"
 
            />
@@ -171,6 +176,7 @@
             android:id="@+id/bAllClear"
             android:layout_width="50dp"
             android:layout_height="40dp"
+            android:backgroundTint="@android:color/holo_red_light"
             android:text="AC"
 
             />
@@ -179,6 +185,7 @@
             android:id="@+id/bBackspace"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:backgroundTint="@android:color/holo_orange_dark"
             android:text="C"
 
             />
@@ -187,6 +194,7 @@
             android:id="@+id/bEquals"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:backgroundTint="@android:color/holo_blue_light"
             android:text="="
 
             />

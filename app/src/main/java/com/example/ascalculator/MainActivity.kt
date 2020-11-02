@@ -78,10 +78,26 @@ class MainActivity : AppCompatActivity() {
 
 
         //Operation button pressed
-        if(operationAllowed&&(input=="*"||input=="/"||input=="+"||input=="-"))
+        if(input=="*"||input=="/"||input=="+"||input=="-")
         {
-            calcScreen.setText( calcScreen.text.toString() + input)
-            operationAllowed=false;
+            if(operationAllowed)
+            {
+                calcScreen.setText( calcScreen.text.toString() + input)
+                operationAllowed=false;
+            }
+            else if(calcScreen.text.toString()[calcScreen.length()-1]=='*'||calcScreen.text.toString()[calcScreen.length()-1]=='/'||calcScreen.text.toString()[calcScreen.length()-1]=='+'||calcScreen.text.toString()[calcScreen.length()-1]=='-')
+            {
+                //Do Nothing
+
+            }
+            else
+            {
+                updateCalculator("=")
+                calcScreen.setText( calcScreen.text.toString() + input)
+                operationAllowed=false;
+
+            }
+
         }
 
         // Number on Keypad is pressed
