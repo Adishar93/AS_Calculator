@@ -17,12 +17,12 @@
         />
 
     <GridLayout
+        android:id="@+id/gKeypad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/calcScreen"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="20dp"
-        android:layout_centerHorizontal="true"
+        android:layout_marginStart="25dp"
         android:columnCount="3"
         >
         <Button
@@ -89,6 +89,13 @@
 
             />
         <Button
+            android:id="@+id/bDecimal"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="."
+
+            />
+        <Button
             android:id="@+id/bZero"
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -100,10 +107,19 @@
             android:id="@+id/bBackspace"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:text="X"
+            android:text="C"
 
             />
 
     </GridLayout>
+
+   <GridLayout
+       android:id="@+id/gOperations"
+       android:layout_height="wrap_content"
+       android:layout_width="wrap_content"
+       android:layout_below="@+id/calcScreen"
+       android:layout_toEndOf="@+id/gKeypad"
+       >
+   </GridLayout>
 
 </RelativeLayout>

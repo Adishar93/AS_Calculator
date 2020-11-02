@@ -13,6 +13,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 const val EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE"
 
 class MainActivity : AppCompatActivity() {
+    var decimalAllowed=true
+    var operationAllowed=true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,11 +40,14 @@ class MainActivity : AppCompatActivity() {
         button2.setOnClickListener {updateCalculator("2")}
         val button3 = findViewById<Button>(R.id.bThree)
         button3.setOnClickListener {updateCalculator("3")}
+        val buttonDecimal=findViewById<Button>(R.id.bDecimal)
+        buttonDecimal.setOnClickListener { updateCalculator(".") }
         val button0 = findViewById<Button>(R.id.bZero)
         button0.setOnClickListener {updateCalculator("0")}
 
         val buttonBackspace = findViewById<Button>(R.id.bBackspace)
-        buttonBackspace.setOnClickListener {updateCalculator("X")}
+        buttonBackspace.setOnClickListener {updateCalculator("C")}
+        buttonBackspace.setOnLongClickListener { updateCalculator("CLEAR") }
 
 
     }
@@ -54,19 +59,42 @@ class MainActivity : AppCompatActivity() {
 //            Toast.LENGTH_SHORT).show()
     }
 
-    private fun updateCalculator(input:String) {
+    private fun updateCalculator(input:String): Boolean {
 
-        //BackSpace Button is Pressed
-        if(input=="X")
+        //C Button is Pressed
+        if(input=="C")
         {
             if(calcScreen.text.length==1&&calcScreen.text.toString()!="0")
             {
                 calcScreen.text="0"
             }
+            else if(calcScreen.text[calcScreen.length()-1]=='.')
+            {
+                calcScreen.text=calcScreen.text.toString().subSequence(0,calcScreen.text.length-1)
+                decimalAllowed=true
+            }
             else if(calcScreen.text.toString()!="0")
             {
                 calcScreen.text=calcScreen.text.toString().subSequence(0,calcScreen.text.length-1)
             }
+
+        }
+        //C button was long pressed
+        else if(input=="CLEAR")
+        {
+            calcScreen.text="0"
+            decimalAllowed=true
+            return true;
+        }
+        //Decimal Button Pressed
+        else if(input==".")
+        {
+            if(decimalAllowed&&Character.isDigit(calcScreen.text[calcScreen.length()-1]))
+            {
+                calcScreen.text = calcScreen.text.toString() + input
+                decimalAllowed=false;
+            }
+
         }
         // Number on Keypad is pressed
         else {
@@ -75,7 +103,8 @@ class MainActivity : AppCompatActivity() {
             } else {
                 calcScreen.text = calcScreen.text.toString() + input
             }
-        }
 
+        }
+        return false;
     }
 }
