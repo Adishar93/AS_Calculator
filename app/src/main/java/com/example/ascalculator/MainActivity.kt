@@ -1,14 +1,14 @@
 package com.example.ascalculator
 
-import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import android.support.v7.app.AppCompatActivity
+import android.text.method.ScrollingMovementMethod
 import android.widget.Button
+import android.widget.EditText
+import android.widget.Scroller
 import android.widget.TextView
-import android.widget.Toast
-import com.example.ascalculator.R
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 const val EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE"
 
@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val calScreen=findViewById<TextView>(R.id.calcScreen)
+        val calScreen=findViewById<EditText>(R.id.calcScreen)
 
         val button7 = findViewById<Button>(R.id.bSeven)
         button7.setOnClickListener {updateCalculator("7")}
@@ -49,6 +49,20 @@ class MainActivity : AppCompatActivity() {
         buttonBackspace.setOnClickListener {updateCalculator("C")}
         buttonBackspace.setOnLongClickListener { updateCalculator("CLEAR") }
 
+        val buttonAllClear = findViewById<Button>(R.id.bAllClear)
+        buttonAllClear.setOnClickListener {updateCalculator("CLEAR")}
+
+        val buttonmul = findViewById<Button>(R.id.bMul)
+        buttonmul.setOnClickListener {updateCalculator("*")}
+        val buttondivide = findViewById<Button>(R.id.bDivide)
+        buttondivide.setOnClickListener {updateCalculator("/")}
+        val buttonadd = findViewById<Button>(R.id.bAdd)
+        buttonadd.setOnClickListener {updateCalculator("+")}
+        val buttonsub = findViewById<Button>(R.id.bSub)
+        buttonsub.setOnClickListener {updateCalculator("-")}
+
+        val buttonequals=findViewById<Button>(R.id.bEquals)
+        buttonequals.setOnClickListener {updateCalculator("=")}
 
     }
 
@@ -61,50 +75,108 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateCalculator(input:String): Boolean {
 
-        //C Button is Pressed
-        if(input=="C")
+
+
+        //Operation button pressed
+        if(operationAllowed&&(input=="*"||input=="/"||input=="+"||input=="-"))
         {
-            if(calcScreen.text.length==1&&calcScreen.text.toString()!="0")
-            {
-                calcScreen.text="0"
+            calcScreen.setText( calcScreen.text.toString() + input)
+            operationAllowed=false;
+        }
+
+        // Number on Keypad is pressed
+        else if(Character.isDigit(input[0])) {
+            if (calcScreen.text.toString() == "0") {
+                calcScreen.setText(input)
             }
-            else if(calcScreen.text[calcScreen.length()-1]=='.')
+            else if(calcScreen.length()>1&&(calcScreen.text[calcScreen.length()-1]=='*'||calcScreen.text[calcScreen.length()-1]=='/'||calcScreen.text[calcScreen.length()-1]=='+'||calcScreen.text[calcScreen.length()-1]=='-'))
             {
-                calcScreen.text=calcScreen.text.toString().subSequence(0,calcScreen.text.length-1)
+                calcScreen.setText(calcScreen.text.toString() + input)
                 decimalAllowed=true
             }
-            else if(calcScreen.text.toString()!="0")
-            {
-                calcScreen.text=calcScreen.text.toString().subSequence(0,calcScreen.text.length-1)
+            else {
+                calcScreen.setText(calcScreen.text.toString() + input)
             }
 
-        }
-        //C button was long pressed
-        else if(input=="CLEAR")
-        {
-            calcScreen.text="0"
-            decimalAllowed=true
-            return true;
         }
         //Decimal Button Pressed
         else if(input==".")
         {
             if(decimalAllowed&&Character.isDigit(calcScreen.text[calcScreen.length()-1]))
             {
-                calcScreen.text = calcScreen.text.toString() + input
+                calcScreen.setText( calcScreen.text.toString() + input)
                 decimalAllowed=false;
             }
 
         }
-        // Number on Keypad is pressed
-        else {
-            if (calcScreen.text.toString() == "0") {
-                calcScreen.text = input
-            } else {
-                calcScreen.text = calcScreen.text.toString() + input
+        //Equals button pressed
+        else if(input=="=")
+        {
+            val screenString=calcScreen.text.toString()
+            if(screenString.contains('*'))
+            {
+                val candidates=screenString.split('*')
+                val first=candidates[0].toDouble()
+                val second=candidates[1].toDouble()
+                calcScreen.setText((first*second).toString())
+            }
+            else if(screenString.contains('/'))
+            {
+                val candidates=screenString.split('/')
+                val first=candidates[0].toDouble()
+                val second=candidates[1].toDouble()
+                calcScreen.setText((first/second).toString())
+            }
+            else if(screenString.contains('+'))
+            {
+                val candidates=screenString.split('+')
+                val first=candidates[0].toDouble()
+                val second=candidates[1].toDouble()
+                calcScreen.setText((first+second).toString())
+            }
+            else if(screenString.contains('-'))
+            {
+                val candidates=screenString.split('-')
+                val first=candidates[0].toDouble()
+                val second=candidates[1].toDouble()
+                calcScreen.setText((first-second).toString())
+            }
+
+            operationAllowed=true;
+        }
+        //C Button is Pressed
+        else if(input=="C")
+        {
+            if(calcScreen.text.length==1&&calcScreen.text.toString()!="0")
+            {
+                calcScreen.setText("0")
+            }
+            else if(calcScreen.text[calcScreen.length()-1]=='.')
+            {
+                calcScreen.setText(calcScreen.text.toString().subSequence(0,calcScreen.text.length-1))
+                decimalAllowed=true
+            }
+            else if(calcScreen.text[calcScreen.length()-1]=='*'||calcScreen.text[calcScreen.length()-1]=='/'||calcScreen.text[calcScreen.length()-1]=='+'||calcScreen.text[calcScreen.length()-1]=='-')
+            {
+                calcScreen.setText(calcScreen.text.toString().subSequence(0,calcScreen.text.length-1))
+                operationAllowed=true
+            }
+            else if(calcScreen.text.toString()!="0")
+            {
+                calcScreen.setText(calcScreen.text.toString().subSequence(0,calcScreen.text.length-1))
             }
 
         }
+        //C button was long pressed
+        else if(input=="CLEAR")
+        {
+            calcScreen.setText("0")
+            decimalAllowed=true
+            operationAllowed=true
+            return true;
+        }
+
+
         return false;
     }
 }
