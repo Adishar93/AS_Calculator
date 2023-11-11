@@ -1,5 +1,7 @@
 # Amazfit Verge AS_Calculator
 Calculator app for Amazfit Verge
+## Inspiration
+Upon acquiring the Amazfit Verge, I encountered a noticeable absence of a calculator application for the watch. Determined to address this gap, I embarked on the journey to create one myself.
 
 
 
