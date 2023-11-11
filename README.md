@@ -1,4 +1,4 @@
-# AmazfitVergeASCalculator
+# Amazfit Verge AS_Calculator
 Calculator app for Amazfit Verge
 
 
